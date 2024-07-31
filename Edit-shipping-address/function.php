@@ -2,7 +2,6 @@
 add_action('wp_ajax_update_user_address', 'update_user_address');
 add_action('wp_ajax_nopriv_update_user_address', 'update_user_address');
 function update_user_address() {
-	global $wpdb;
 	$user_id = get_current_user_id();
     $address = sanitize_text_field($_POST['address']);
     $ward = sanitize_text_field($_POST['ward']);
