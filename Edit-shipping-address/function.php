@@ -1,4 +1,41 @@
 <?php
+<?php  
+add_action('wp_ajax_update_user_address', 'update_user_address');
+add_action('wp_ajax_nopriv_update_user_address', 'update_user_address');
+function update_user_address() {
+	global $wpdb;
+	$user_id = get_current_user_id();
+    $address = sanitize_text_field($_POST['address']);
+    $ward = sanitize_text_field($_POST['ward']);
+    $district = sanitize_text_field($_POST['district']);
+    $city = sanitize_text_field($_POST['city']);
+    $country = sanitize_text_field($_POST['country']);
+    $postcode = sanitize_text_field($_POST['postcode']);
+
+    if($country){
+    	update_user_meta($user_id, 'billing_country', $country);
+    }
+    if($ward){
+    	update_user_meta($user_id, 'billing_address_2', $ward);
+    }
+    if($district){
+    	update_user_meta($user_id, 'billing_city', $district);
+    }
+    if($billing_address_1){
+    	update_user_meta($user_id, 'billing_address_1', $address);
+    }
+    if($city){
+    	update_user_meta($user_id, 'billing_state', $city);
+    }
+    if($postcode){
+    	update_user_meta($user_id, 'billing_postcode', $postcode);
+    }
+
+    echo 'success';
+
+    die();
+}
+
 // Xử lý AJAX request để lấy danh sách tiểu bang dựa trên quốc gia
 add_action('wp_ajax_get_states_by_country', 'get_states_by_country_callback');
 add_action('wp_ajax_nopriv_get_states_by_country', 'get_states_by_country_callback');
