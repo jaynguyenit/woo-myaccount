@@ -1,5 +1,4 @@
 <?php
-<?php  
 add_action('wp_ajax_update_user_address', 'update_user_address');
 add_action('wp_ajax_nopriv_update_user_address', 'update_user_address');
 function update_user_address() {
